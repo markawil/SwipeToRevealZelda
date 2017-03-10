@@ -25,11 +25,19 @@ class LinkTableViewCell: UITableViewCell, UIScrollViewDelegate {
         self.contentView.frame = self.bounds
         self.scrollView.contentSize = self.scrollView.bounds.size
         self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 100)
+        self.linkImageView.alpha = 0.0
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.x < 0) {
             scrollView.contentOffset = CGPoint()
+            return
+        }
+        
+        if (scrollView.contentOffset.x < 100) {
+            let xValue = scrollView.contentOffset.x
+            let percentage = xValue/100
+            self.linkImageView.alpha = percentage
         }
     }
 }
